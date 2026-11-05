@@ -6,7 +6,7 @@ if($('.filters')){let filter=new URLSearchParams(location.search).get('grupa')||
 if($('.check-item')){let checks=[];try{checks=JSON.parse(localStorage.getItem('hk-checklist')||'[]')}catch{}const inputs=$$('[data-check]');inputs.forEach((e,i)=>e.checked=checks.includes(i));function progress(){const selected=inputs.map((e,i)=>e.checked?i:null).filter(x=>x!==null);$('#check-count').textContent=selected.length+' din '+inputs.length+' pregătite';$('#check-progress').max=inputs.length;$('#check-progress').value=selected.length;try{localStorage.setItem('hk-checklist',JSON.stringify(selected))}catch{}}inputs.forEach(e=>e.addEventListener('change',progress));$('#reset-list').onclick=()=>{inputs.forEach(e=>e.checked=false);progress()};progress()}
 if($('#booking-form')){
  const submit=$('#booking-form button[type="submit"]');submit.disabled=true;
- Promise.all([fetch('/services.json').then(r=>{if(!r.ok)throw Error();return r.json()}),fetch('/pricing.json').then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([services,pricing])=>{
+ Promise.all([fetch('/tamara/services.json').then(r=>{if(!r.ok)throw Error();return r.json()}),fetch('/tamara/pricing.json').then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([services,pricing])=>{
   const chosen=new URLSearchParams(location.search).get('serviciu');
   if(chosen!==null&&/^\d+$/.test(chosen)&&services[Number(chosen)])$('#service-select').value=chosen;
   const localToday=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Chisinau'}).format(new Date());
