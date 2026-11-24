@@ -7,7 +7,7 @@ if($('.check-item')){let checks=[];try{checks=JSON.parse(localStorage.getItem('h
 if($('#booking-form')){
  const submit=$('#booking-form button[type="submit"]');submit.disabled=true;
  const isRussian=document.documentElement.lang==='ru';
- Promise.all([fetch(isRussian?'/services-ru.json':'/services.json').then(r=>{if(!r.ok)throw Error();return r.json()}),fetch(isRussian?'/pricing-ru.json':'/pricing.json').then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([services,pricing])=>{
+ Promise.all([fetch(isRussian?'services-ru.json':'services.json').then(r=>{if(!r.ok)throw Error();return r.json()}),fetch(isRussian?'pricing-ru.json':'pricing.json').then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([services,pricing])=>{
   const chosen=new URLSearchParams(location.search).get('serviciu');
   if(chosen!==null&&/^\d+$/.test(chosen)&&services[Number(chosen)])$('#service-select').value=chosen;
   const localToday=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Chisinau'}).format(new Date());
