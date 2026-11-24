@@ -39,7 +39,7 @@ if($('#booking-form')){
    resetResult();
    const result=$('#booking-result');
    try{
-    const response=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('#full-name').value,phone:$('#mobile-number').value,service:$('#service-select').value,category:$('#category-select').value,duration:$('#duration-select').value,date,time:$('#time').value})});
+    const response=await fetch('https://health-kinesiology-ro.victorbar.chatgpt.site/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('#full-name').value,phone:$('#mobile-number').value,service:$('#service-select').value,category:$('#category-select').value,duration:$('#duration-select').value,date,time:$('#time').value})});
     const data=await response.json();
     if(!response.ok||!data.ok)throw new Error(data.error||'Solicitarea nu a putut fi trimisă.');
     result.textContent=isRussian?'Заявка на запись отправлена. Мы позвоним вам для подтверждения.':'Solicitarea de programare a fost trimisă. Vă vom contacta telefonic pentru confirmare.';
